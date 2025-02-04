@@ -2,20 +2,119 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body{
+  overflow-x: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
+  
+  .input {
+    @apply bg-white focus:outline-primary rounded p-2 text-sm border border-grey placeholder:text-grey;
+  }
+
+  .select {
+    @apply appearance-none bg-white focus:outline-primary rounded p-2 text-sm border border-grey text-grey;
+  }
+
+  .option {
+    @apply  border-grey text-grey rounded p-2;
+  }
+
+  .input_container{
+    @apply flex flex-col gap-1;
+  }
+
+  .label{
+    @apply text-sm text-black;
+  }
+
+  .span{
+    @apply flex-1 text-white text-left;
+  }
+
+  .td{
+    @apply text-text flex-1 h-full;
+  }
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --radius: 0.5rem;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+#form { 
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
+
+ #form::-webkit-scrollbar {
+  display: none; 
+}
+
+#dropdown {
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+#dropdown::-webkit-scrollbar {
+  display: none; 
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.opacityanimation{
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.fadeOutUp{
+  animation: fadeOutUp 0.6s ease-in forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+  }
+  25% {
+      opacity: 0.25;
+  }
+  50% {
+      opacity: 0.5;
+  }
+  75% {
+      opacity: 0.75;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+
+@keyframes fadeOutUp {
+  0% {
+      opacity: 1;
+  }
+  25% {
+      opacity: 0.75;
+  }
+  50% {
+      opacity: 0.5;
+  }
+  75% {
+      opacity: 0.25;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+

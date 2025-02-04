@@ -1,101 +1,117 @@
+'use client';
+import { ArrowDown, ArrowUp, Car, ChevronDown, ChevronUp, MapPin, Plus, SpaceIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import AddNewPartner from "./components/AddNewPartner";
+import DropDown from "./components/DropDown";
+import PartnersTable from "./components/PartnersTable";
+
+
+const Links = [
+  {
+    icon: '/icons/storefront.svg',
+    selected:true
+  },
+  {
+    icon:'/icons/iconamoon_category-light.svg',
+    selected:false
+  },
+  {
+    icon: '/icons/Group.svg',
+    selected:false
+  },
+  {
+    icon: '/icons/setting-07.svg',
+    selected:false
+  },
+]
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  const [openAddPartner, setOpenAddPartner] = useState(false);
+  const [openFilters, setOpenFilters] = useState(false);
+
+  return (
+    <div className="min-h-screen h-auto bg-[url('/background.png')] bg-cover relative">        
+      <div className="flex backdrop-blur-[5px]">   
+          <div className="relative z-40 flex-1 bg-white bg-opacity-10">
+              <div className="min-h-screen h-full px-2 pt-10 flex flex-col items-center backdrop-blur-[5px]">
+                <div className="flex items-center gap-2">
+                  <Image src={'/PIASSA_LOGO.svg'} alt="logo" width={100} height={40} className="object-contain"/>
+                </div>
+                <div className="p-1 bg-white bg-opacity-20 rounded-full my-10">
+                  <Link href={'/'} className="flex items-center justify-center p-2 bg-primary rounded-t-full">
+                    <Image src={'/icons/storefront.svg'} alt="/" width={25} height={25} className="object-contain"/>
+                  </Link>
+                  <Link href={'/'} className="flex items-center justify-center p-2 rounded-b-full bg-white bg-opacity-10">
+                    <Image src={'/icons/package_2.svg'} alt="/" width={25} height={25} className="object-contain"/>
+                  </Link>
+                </div>
+                <div className="flex flex-col justify-center gap-2">
+                  {Links.map((link,index) => {
+                    return(
+                      <Link href={'/'} key={index} className={`${link.selected ? 'bg-primary' : 'bg-white bg-opacity-10'} rounded p-2`}>
+                        <Image src={link.icon} alt="/" width={25} height={25} className="object-contain"/>
+                      </Link>
+                    )
+                  })}
+                </div>
+                <div >
+                    <Link className="flex items-center justify-center mt-10" href={'/'}>  
+                      <span className='bg-white bg-opacity-10 p-2 rounded'>
+                        <Image src={'/icons/logout-05.svg'} alt="/" width={25} height={25} className="object-contain"/>
+                      </span>
+                    </Link>
+                </div>
+              </div>
+          </div>
+          <div className="flex-[9] pl-4 pr-20">
+            <div className="flex items-center justify-between py-4">
+              <form className="flex gap-5">
+                <div className="w-[330px] h-[40px] flex items-center gap-2 bg-black bg-opacity-50 rounded px-2">
+                  <div className="relative inline-block">
+                    <span 
+                      onClick={()=>setOpenFilters(!openFilters)}
+                      className="cursor-pointer">
+                      <Image src={'/logo.svg'} alt="/" width={25} height={25} className="object-contain"/>
+                    </span>
+                    {
+                      openFilters && 
+                      <div className="origin-top-right absolute right-0 w-full
+                    rounded-md rounded-t-none bg-white bg-opacity-50 mt-[1px] ring-1 ring-black ring-opacity-5
+                    focus:outline-none max-h-[200px] overflow-y-auto z-40">
+                        <ul className="text-white">
+                          <li className="w-full flex items-center justify-center cursor-pointer hover:bg-primary py-2"><Car size={15}/></li>
+                          <li className="w-full flex items-center justify-center cursor-pointer hover:bg-primary py-2"><Car size={15}/></li>
+                          <li className="w-full flex items-center justify-center cursor-pointer hover:bg-primary py-2"><Car size={15}/></li>
+                          <li className="w-full flex items-center justify-center cursor-pointer hover:bg-primary py-2"><Car size={15}/></li>
+                        </ul>
+                      </div>
+                    }
+                  </div>
+                  <input type="text" placeholder="Recherche" className="text-white focus:outline-none bg-transparent pl-2 border-l-[1px] border-white placeholder:text-white"/>
+                </div>
+                <DropDown/>
+              </form>
+              <div className="flex items-center gap-8 text-white">
+                  <p className="font-semibold">Admin Name</p>
+                  <div className="flex flex-col items-center">
+                    <p>07-11-2001</p>
+                    <p>11:30 AM</p>
+                  </div>
+              </div>
+            </div>
+            <div className="flex justify-end mt-5">
+              <button onClick={()=>setOpenAddPartner(true)} className="flex items-center gap-5 text-white bg-primary p-2 duration-200 rounded">
+                <p>Ajouter nouvel Partners</p>
+                <Plus size={20}/>
+              </button>
+            </div>
+            <PartnersTable/>
+          </div>
+          {openAddPartner && <AddNewPartner openAddPartner={openAddPartner} setOpenAddPartner={setOpenAddPartner}/>}
+    </div>
     </div>
   );
 }
